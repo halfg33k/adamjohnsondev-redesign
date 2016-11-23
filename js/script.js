@@ -1,22 +1,35 @@
+// boxes containing each feature
 var features = document.getElementsByClassName('work--features--feature');
+// each project displayed
 var projects = document.getElementsByClassName('work--portfolio--project');
+// window dimensions
 var windowWidth = window.innerWidth;
 var windowHeight = window.innerHeight;
+// before the fold
 var bfold = document.getElementById('bfold');
+// buttons to scroll the page
 var btnScrollToTop = document.getElementById('backToTop');
 var btnScrollToContact = document.getElementById('scrollToContact');
 var btnScrollToContactSmall = document.getElementById('scrollToContactSmall');
+// icons for each of the features
+var featureIcons = [];
+featureIcons.push(document.getElementById('feature_modern'));
+featureIcons.push(document.getElementById('feature_custom'));
+featureIcons.push(document.getElementById('feature_responsive'));
 
 // set height of bfold to prevent resizing on phones when the address bar disappears
-bfold.style.height = windowHeight + "px";
+bfold.style.height = windowHeight + 'px';
 
+// make these elements invisible when the page loads
 // setting this here prevents the elements from disappearing if javascript is disabled
+/*
 for(var i = 0; i < features.length; i++){
     features[i].style.opacity = '0';
 }
 for(var i = 0; i < projects.length; i++){
     projects[i].getElementsByTagName('IMG')[0].style.opacity = '0';
 }
+*/
 
 // resize bfold when the width changes (also covers orientation change)
 function resizeBFold() {
@@ -59,6 +72,7 @@ function resizeFeatures() {
 } // resizeFeatures
 
 // fade in effect on scroll and scroll to top button
+/*
 function loadElements() {
     // fade in features
     for(var i = 0; i < features.length; i++) {
@@ -103,7 +117,9 @@ function loadElements() {
         btnScrollToTop.style.opacity = '0';
     }
 } // loadElements
+*/
 
+// for smoothScrollTo
 function animation(effectFrame, duration, from, to, easing, framespacing) {
     var start = Date.now(), change;
 
@@ -131,14 +147,16 @@ function animation(effectFrame, duration, from, to, easing, framespacing) {
             effectFrame(to);
         }
     }());
-}
+} // animation
 
+// smoothly scroll to the destination
 function smoothScrollTo(target, duration) {
     var start = window.pageYOffset;        
     duration = duration || 1000;
     animation(function (position) { window.scroll(0,position); }, duration, start, target);
-};
+}; // smoothScrollTo
 
+// add event listeners
 window.addEventListener('resize', resizeFeatures);
 window.addEventListener('scroll', loadElements);
 btnScrollToTop.addEventListener('click', function(){smoothScrollTo(0,750)});
