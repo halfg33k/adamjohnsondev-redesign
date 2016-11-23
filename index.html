@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html lang="en" id="html">
+<head>
+
+    <!-- Basic metadata -->
+    <title>Adam Johnson Dev</title>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Freelance web design and development in the Richmond, VA area." />
+    <meta name="robots" content="index/follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Facebook metadata -->
+    <meta name="og:title" content="Adam Johnson Dev" />
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="images/logo.svg" />
+    <meta name="og:url" content="http://adamjohnsondev.com" />
+    <meta name="og:description" content="Freelance web design and development in the Richmond, VA area." />
+    
+    <!-- Twitter metadata -->
+    <meta name="twitter:card" content="summary" />
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="manifest.json">
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#0073bf">
+    <meta name="theme-color" content="#ffffff">
+
+</head>
+<body>
+
+    <div id="backToTop" class="backToTop"></div>
+
+    <div id="bfold" class="bfold"> <!-- before the fold -->
+        <h1>Adam Johnson</h1>
+        <p id="scrollToContact">Contact Me!</p>
+        <p id="scrollToContactSmall">Contact</p>
+        <img src="images/logo.svg" />
+        <div class="bfold--border"></div>
+    </div>
+
+    <div class="work">
+        <div class="work--features">
+            <div class="work--features--feature work--features--modern">
+                <img src="images/modern.svg" />
+                <hr />
+                <div class="work--features--feature--info">
+                    <h2>Modern</h2>
+                    <p>I use the latest technologies, such as HTML5, CSS3, and Javascript to ensure a captivating experience.</p>
+                </div>
+            </div>
+            <div class="work--features--feature work--features--custom">
+                <img src="images/custom.png" srcset="images/custom.png 512w, images/custom_small.png 110w" />
+                <hr />
+                <div class="work--features--feature--info">
+                    <h2>Custom</h2>
+                    <p>Professional websites made to order. You're more valuable to me than a Wordpress template.</p>
+                </div>
+            </div>
+            <div class="work--features--feature work--features--responsive">
+                <img src="images/responsive.svg" />
+                <hr />
+                <div class="work--features--feature--info">
+                    <h2>Responsive</h2>
+                    <p>Half of all web traffic now comes from mobile devices. Today's web requires a clean design across all platforms.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="work--portfolio">
+            <div class="work--portfolio--project">
+                <img class="work--portfolio--project--image" src="images/aikido.png" srcset="images/aikido.png 1920w, images/aikido_small.png 610w, images/aikido_mobile.png 329w" />
+                <div class="work--portfolio--project--info">
+                    <h2>Richmond Aikido Kai</h2>
+                    <p>Richmond Aikido Kai is a martial arts dojo in the historic Fan district of Richmond. I worked closely with them to reimagine their outdated and inconsistent website.</p>
+                    <a href="http://adamjohnsondev.com/aikido" target="_blank" rel="nofollow">View Site</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contact">
+        <h2>Hire Me!</h2>
+        <p>If you'd like to work with me, please fill out the form below.</p>
+        <form action="php/contact.php" method="post">
+            <div class="contact--left">
+                <input type="text" name="name" placeholder="Your Name" />
+                <!--<input type="text" name="company" placeholder="Your Company" />-->
+                <input type="text" name="email" placeholder="Your Email" />
+            </div><div class="contact--right">
+                <!--<input type="text" name="website" placeholder="Your Website (if you have one)" />-->
+                <textarea name="details" placeholder="Your Project" ></textarea>
+            </div>
+            <input class="button" type="submit" value="Submit" />
+        </form>
+        <p>You can also email me directly at <a href="mailto:adam@adamjohnsondev.com?Subject=Job%20Offer" target="_top">adam@adamjohnsondev.com</a></p>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-82413389-2', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+</body>
+</html>

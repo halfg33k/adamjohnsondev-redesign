@@ -1,0 +1,9 @@
+Desktop
+    resolution:     1280
+    column:         60
+    gutter:         20
+    
+Mobile
+    resolution:     750
+    column:         44
+    gutter:         20

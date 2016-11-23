@@ -1,0 +1,4 @@
+scss css/style.scss:css/style.css
+rm css/*.map
+
+scp -r /mnt/webdev/000-Adam_Johnson/*.html /mnt/webdev/000-Adam_Johnson/css/ /mnt/webdev/000-Adam_Johnson/js/ dyemarke@dyemarker.com:/home2/dyemarke/public_html/adamjohnsondev/dev/
