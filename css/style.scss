@@ -194,6 +194,20 @@ p {
 			transform: translateX(-50%);
         }
 
+        svg {
+            position: relative;
+            height: $base5;
+            width: auto;
+            left: 50%;
+            fill: none;
+            stroke: #000000;
+            stroke-width: 1;
+            margin-bottom: $base2;
+            -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
+        }
+
         hr {
             position: relative;
             height: 2px;

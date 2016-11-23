@@ -152,6 +152,18 @@ p {
       -webkit-transform: translateX(-50%);
       -ms-transform: translateX(-50%);
       transform: translateX(-50%); }
+    .work--features .work--features--feature svg {
+      position: relative;
+      height: 6.854em;
+      width: auto;
+      left: 50%;
+      fill: none;
+      stroke: #000000;
+      stroke-width: 1;
+      margin-bottom: 1.618em;
+      -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      transform: translateX(-50%); }
     .work--features .work--features--feature hr {
       position: relative;
       height: 2px;
