@@ -16,6 +16,13 @@ var featureIcons = [];
 featureIcons.push(document.getElementById('feature_modern'));
 featureIcons.push(document.getElementById('feature_custom'));
 featureIcons.push(document.getElementById('feature_responsive'));
+// elements of the icons
+var paths = [];
+var circles = [];
+var rects = [];
+// height of the page
+var html = document.querySelector('html');
+var htmlHeight = parseFloat(window.getComputedStyle(html).getPropertyValue('height'));
 
 // set height of bfold to prevent resizing on phones when the address bar disappears
 bfold.style.height = windowHeight + 'px';
@@ -45,9 +52,8 @@ function resizeBFold() {
 
 // keep the height of the feature boxes consistent
 function resizeFeatures() {
-    // set variables
-    var maxHeight = 0;
-    var temp = 0;
+    var maxHeight = 0; // max height
+    var currHeight = 0; // current height
 
     // allow features to resize to fit contents
     for(var i = 0; i < features.length; i++){
@@ -56,10 +62,10 @@ function resizeFeatures() {
 
     // find the greatest height
     for(var i = 0; i < features.length; i++){
-        temp = features[i].offsetHeight;
+        currHeight = features[i].offsetHeight;
 
-        if(temp > maxHeight) {
-            maxHeight = temp;
+        if(currHeight > maxHeight) {
+            maxHeight = currHeight;
         }
     }
 
@@ -71,45 +77,78 @@ function resizeFeatures() {
     resizeBFold();
 } // resizeFeatures
 
-// fade in effect on scroll and scroll to top button
-/*
+// prepare the feature icons for scroll animation
+function prepareIconsForAnim(){
+    var tempArray, temp;
+
+    for(var i = 0; i < featureIcons.length; i++){
+        // paths
+        tempArray = featureIcons[i].getElementsByTagName('path');
+        for(var j = 0; j < tempArray.length; j++){
+            paths.push(tempArray[j]);
+            temp = tempArray[j].getTotalLength(); // length of path
+            tempArray[j].style.strokeDasharray = temp;
+            //tempArray[j].style.strokeDashoffset = (i % 2 == 0) ? temp : -temp;
+            tempArray[j].style.strokeDashoffset = -temp;
+        }
+
+        // circles
+        tempArray = featureIcons[i].getElementsByTagName('circle');
+        for(var j = 0; j < tempArray.length; j++){
+            circles.push(tempArray[j]);
+            temp = tempArray[j].getAttribute('r') * 2 * 3.14159265; // 2*pi*r
+            tempArray[j].style.strokeDasharray = temp;
+            tempArray[j].style.strokeDashoffset = (i % 2 == 0) ? temp : -temp;
+        }
+
+        // rectangles
+        tempArray = featureIcons[i].getElementsByTagName('rect');
+        for(var j = 0; j < tempArray.length; j++){
+            rects.push(tempArray[j]);
+            temp = (tempArray[j].getAttribute('width') * 2) + (tempArray[j].getAttribute('height') * 2);
+            tempArray[j].style.strokeDasharray = temp;
+            tempArray[j].style.strokeDashoffset = (i % 2 == 0) ? temp : -temp;
+        }
+    }
+
+
+
+} // prepareIconsForAnim
+
+// animate the feature icons on scroll
+window.onscroll = function animateIcons(){
+    // how far down have we scrolled
+    var featureTop = features[0].getBoundingClientRect().top;
+    var featureHeight = parseInt(features[0].style.height, 10);
+    var percentageComplete = (((window.pageYOffset + (windowHeight / 8)) / (windowHeight)) * 100);
+    // keep reasonable percentages
+    percentageComplete = (percentageComplete < 0 ? 0 : percentageComplete);
+    percentageComplete = (percentageComplete > 100 ? 100 : percentageComplete);
+    var newUnit, dashOffset, offsetUnit, perim;
+
+    // paths
+    for(var i = 0; i < paths.length; i++){
+        dashOffset = paths[i].getTotalLength();
+        newUnit = parseInt(dashOffset, 10);
+        offsetUnit = percentageComplete * (newUnit / 100);
+        paths[i].style.strokeDashoffset = newUnit + offsetUnit;
+    }
+
+    // circles
+    for(var i = 0; i < circles.length; i++){
+        perim = circles[i].getAttribute('r') * 2 * 3.14159265;
+        circles[i].style.strokeDashoffset = (i % 2 == 0) ? -perim + (perim * (percentageComplete / 100)) : perim - (perim * (percentageComplete / 100));
+    }
+
+    // rectangles
+    for(var i = 0; i < rects.length; i++){
+        perim = ((rects[i].getAttribute('width') * 2) + (rects[i].getAttribute('height') * 2));
+        rects[i].style.strokeDashoffset = (i % 2 == 0) ? -perim + (perim * (percentageComplete / 100)) : perim - (perim * (percentageComplete / 100));
+    }
+} // animateIcons
+
+// fade in effect on scroll to top button
 function loadElements() {
-    // fade in features
-    for(var i = 0; i < features.length; i++) {
-        var objectBottom = features[i].offsetTop + features[i].offsetHeight;
-        if(window.scrollTop != undefined) {
-            var windowBottom = window.scrollTop + (window.innerHeight / 3);
-        } else {
-            var windowBottom = window.pageYOffset + (window.innerHeight / 3);
-        }
-
-        if(windowBottom > objectBottom) {
-            features[i].style.opacity = '1';
-            features[i].style.transform = 'translateY(0)';
-        } else {
-            features[i].style.opacity = '0';
-            features[i].style.transform = 'translateY(3em)';
-        }
-    }
-
-    // fade in project images
-    for(var i = 0; i < projects.length; i++) {
-        var objectBottom = projects[i].offsetTop + projects[i].offsetHeight;
-        if(window.scrollTop != undefined) {
-            var windowBottom = window.scrollTop + (window.innerHeight / 3);
-        } else {
-            var windowBottom = window.pageYOffset - (window.innerHeight / 5);
-        }
-
-        if(windowBottom > objectBottom) {
-            projects[i].getElementsByTagName('IMG')[0].style.opacity = '1';
-            projects[i].getElementsByTagName('IMG')[0].style.transform = 'translateY(0)';
-        } else {
-            projects[i].getElementsByTagName('IMG')[0].style.opacity = '0';
-            projects[i].getElementsByTagName('IMG')[0].style.transform = 'translateY(3em)';
-        }
-    }
-
     if(window.scrollTop != undefined && window.scrollTop > 10
         || window.pageYOffset != undefined && window.pageYOffset > 10) {
         btnScrollToTop.style.opacity = '0.75';
@@ -117,7 +156,6 @@ function loadElements() {
         btnScrollToTop.style.opacity = '0';
     }
 } // loadElements
-*/
 
 // for smoothScrollTo
 function animation(effectFrame, duration, from, to, easing, framespacing) {
@@ -163,3 +201,4 @@ btnScrollToTop.addEventListener('click', function(){smoothScrollTo(0,750)});
 btnScrollToContact.addEventListener('click', function(){smoothScrollTo(document.documentElement.scrollHeight,750)});
 btnScrollToContactSmall.addEventListener('click', function(){smoothScrollTo(document.documentElement.scrollHeight,750)});
 resizeFeatures();
+prepareIconsForAnim();
